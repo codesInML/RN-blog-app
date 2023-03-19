@@ -4,11 +4,10 @@ import { Context } from "../context/BlogContext";
 import { FontAwesome } from "@expo/vector-icons";
 
 const ShowScreen = ({ navigation }) => {
+  const blogID = navigation.getParam("id");
   const { state } = useContext(Context);
 
-  const blogPost = state.find(
-    (blogPost) => blogPost.id === navigation.getParam("id")
-  );
+  const blogPost = state.find((blogPost) => blogPost.id === blogID);
   return (
     <View>
       <Text>{blogPost.title}</Text>
@@ -20,7 +19,12 @@ const ShowScreen = ({ navigation }) => {
 ShowScreen.navigationOptions = ({ navigation }) => {
   return {
     headerRight: (
-      <TouchableOpacity onPress={() => navigation.navigate("Edit")}>
+      <TouchableOpacity
+        onPress={() => {
+          console.log(navigation.navigate("id"));
+          navigation.navigate("Edit", { id: navigation.getParam("id") });
+        }}
+      >
         <FontAwesome name="pencil" size={30} />
       </TouchableOpacity>
     ),

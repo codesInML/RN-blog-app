@@ -21,7 +21,6 @@ ShowScreen.navigationOptions = ({ navigation }) => {
     headerRight: (
       <TouchableOpacity
         onPress={() => {
-          console.log(navigation.navigate("id"));
           navigation.navigate("Edit", { id: navigation.getParam("id") });
         }}
       >
